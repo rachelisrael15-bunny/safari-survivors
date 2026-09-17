@@ -4,27 +4,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Safari Survivors</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/h5p-standalone@3.9.0/dist/styles/h5p.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/h5p-standalone@3.8.2/dist/styles/h5p.css">
   <style>
     html,body{margin:0;padding:0;background:#fff;font-family:Arial,sans-serif}
     #h5p-container{width:100%;max-width:1200px;margin:0 auto}
+    #status{max-width:1200px;margin:1rem auto;padding:0 1rem;font:16px/1.4 Arial,sans-serif;color:#333}
   </style>
 </head>
 <body>
+  <div id="status">Loading Safari Survivors…</div>
   <div id="h5p-container"></div>
-  <script src="https://cdn.jsdelivr.net/npm/h5p-standalone@3.9.0/dist/main.bundle.js" charset="UTF-8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/h5p-standalone@3.8.2/dist/main.bundle.js" charset="UTF-8"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const el = document.getElementById('h5p-container');
-      const options = {
-        h5pJsonPath: './h5p-content',
-        frameJs: 'https://cdn.jsdelivr.net/npm/h5p-standalone@3.9.0/dist/frame.bundle.js',
-        frameCss: 'https://cdn.jsdelivr.net/npm/h5p-standalone@3.9.0/dist/styles/h5p.css',
-        frame: false,
-        copyright: false,
-        export: false
-      };
-      new H5PStandalone.H5P(el, options);
+    document.addEventListener('DOMContentLoaded', async function () {
+      const status = document.getElementById('status');
+      try {
+        if (!window.H5PStandalone || !window.H5PStandalone.H5P) {
+          throw new Error('H5P player failed to load.');
+        }
+        const el = document.getElementById('h5p-container');
+        const options = {
+          h5pJsonPath: './h5p-content',
+          frameJs: 'https://cdn.jsdelivr.net/npm/h5p-standalone@3.8.2/dist/frame.bundle.js',
+          frameCss: 'https://cdn.jsdelivr.net/npm/h5p-standalone@3.8.2/dist/styles/h5p.css',
+          frame: false,
+          copyright: false,
+          export: false
+        };
+        await new H5PStandalone.H5P(el, options);
+        status.remove();
+      } catch (err) {
+        console.error(err);
+        status.textContent = 'Safari Survivors could not load. Please refresh the page.';
+      }
     });
   </script>
 </body>
