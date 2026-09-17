@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Safari Survivors</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/h5p-standalone@3.9.0/dist/styles/h5p.css">
+  <style>
+    html,body{margin:0;padding:0;background:#fff;font-family:Arial,sans-serif}
+    #h5p-container{width:100%;max-width:1200px;margin:0 auto}
+  </style>
+</head>
+<body>
+  <div id="h5p-container"></div>
+  <script src="https://cdn.jsdelivr.net/npm/h5p-standalone@3.9.0/dist/main.bundle.js" charset="UTF-8"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const el = document.getElementById('h5p-container');
+      const options = {
+        h5pJsonPath: './h5p-content',
+        frameJs: 'https://cdn.jsdelivr.net/npm/h5p-standalone@3.9.0/dist/frame.bundle.js',
+        frameCss: 'https://cdn.jsdelivr.net/npm/h5p-standalone@3.9.0/dist/styles/h5p.css',
+        frame: false,
+        copyright: false,
+        export: false
+      };
+      new H5PStandalone.H5P(el, options);
+    });
+  </script>
+</body>
+</html>
